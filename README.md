@@ -6,7 +6,7 @@ Build a  modern data warehouse with SQL Server, including ETL Processes, data mo
 
 **Project Requirements**
 
-Building the Data Warehouse (Date Engineering)
+Building the Data Warehouse (Data Engineering)
 
 **Objective**
 
