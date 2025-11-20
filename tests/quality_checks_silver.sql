@@ -23,7 +23,7 @@ Usage notes :
 -- Check for NULLS or Duplicates in Primary Key
 -- Expetation: No Results
 SELECT
-    cst_id
+    cst_id,
     COUNT(*)
 FROM silver.crm_cust_info
 GROUP BY cst_id
@@ -48,7 +48,7 @@ FROM silver.crm_cust_info;
 -- Check for NULLS or Duplicates in Primary Key
 -- Expetation: No Results
 SELECT
-    prd_id
+    prd_id,
     COUNT(*)
 FROM silver.crm_prd_info
 GROUP BY prd_id
