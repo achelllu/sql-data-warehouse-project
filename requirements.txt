@@ -1,0 +1,5 @@
+# No Python dependencies.
+# This project uses only SQL Server and T-SQL.
+# Tools required:
+# - SQL Server (on-premises or cloud)
+# - SQL Server Management Studio (SSMS) or Azure Data Studio
