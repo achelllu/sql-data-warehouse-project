@@ -109,11 +109,11 @@ data-warehouse-project/
 ├── datasets/            # Raw datasets used for the project (ERP and CRM data)
 │
 ├── docs/                # Project documentation and architecture details
-│   ├── data_architecture.drawio      # Architecture diagram (Draw.io)
+│   ├── data_architecture.png         # Architecture diagram 
 │   ├── data_catalog.md               # Data catalog with field descriptions & metadata
-│   ├── data_flow.drawio              # Data flow diagram
-│   ├── data_integration.drawio       # Data integration model
-│   ├── data_models.drawio            # Data models (star schema)
+│   ├── data_flow.png                 # Data flow diagram
+│   ├── data_integration.png          # Data integration model
+│   ├── data_models.png               # Data models (star schema)
 │   └── naming-conventions.md         # Naming guidelines (tables, columns, files)
 │
 ├── scripts/             # SQL scripts for ETL and transformations
