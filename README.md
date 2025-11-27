@@ -1,47 +1,170 @@
-# sql-data-warehouse-project
+# 📘 SQL Data Warehouse Project
 
-**Project Overview**
+Modern Data Warehouse | ETL | Medallion Architecture | Dimensional Modelling | Analytics
 
-Build a  modern data warehouse with SQL Server, including ETL Processes, data modelling and analytics. Design for Portofolio Project. Part of  'SQL Full Course for Beginers (30 hours) - Data With Baraa'.  
+ ### 📌 Project Overview 
 
-**Project Requirements**
+This project demonstrates the design and implementation of a Modern Data Warehouse using SQL Server, following the Medallion Architecture (Bronze → Silver → Gold).
+It includes:
 
-Building the Data Warehouse (Data Engineering)
+Multi-source ingestion (CRM & ERP)
 
-**Objective**
+ETL/ELT processes using stored procedures
 
-Develop a modern Data Warehouse using SQL Server to consolidate sales data, enabling analytical reporting and informed decision making.
+Data cleansing & standardization
 
-**Specifications**
+Dimensional modelling (Star Schema)
 
-- **Data Source** : Import data from two source systems (ERP dan CRM) provided as CSV files.
-- **Data Quality** : Cleanse and resolve data quality issues prior to analysis.
-- **Integration** : Combine both source into a single, user-friendly data model designed for analytical queries.
-- **Scope** : Focus on the last dataset only, historization of data is not required.
-- **Documentation** : Provide clear documentation of the data model to support both business stakeholders and analytics team.
-- 
+Data Quality Checks
 
-**BI Analytics & Reporting (Data Analytics)**
+Documentation (Architecture, Data Flow, Data Model, Data Catalog)
 
-**Objective**
-Develop SQL-based analytics to deliver detailed insight into :
-
-- **Customer Behaviour**
-- **Product Performance**
-- **Sales Trends**
-
-These insights empower stakeholders with key business metrics, enabling strategic decision-making.
-
-**License**
-
-This project is license under the MIT License. You are free to used, modify and share this project with proper attribution.
+This project is part of the course “SQL Full Course for Beginners (30 hours) – Data With Baraa” and is developed as a portfolio-ready Data Engineering project.
 
 
-Prepared by [Marsel Luase]
+## 🏗️ High-Level Architecture
+<img width="1654" height="1169" alt="image" src="https://github.com/user-attachments/assets/e26a8822-05c9-4402-b839-a82e1ba036e5" />
 
-Contact: luaseachell@gmail.com
+The warehouse follows a Medallion Architecture:
 
-🔗 LinkedIn / Portfolio: [https://www.linkedin.com/in/marsel-pongdatu-luase-24249836a/]
+Layer	Purpose	Object Type	Description
+
+Bronze	Raw data ingestion	Tables	Loaded as-is (no transformations).
+
+Silver	Cleaned, standardized data	Tables	Data cleansing, normalization, derived fields.
+
+Gold	Business-ready analytics layer	Views	Integrated dimensional model (Star Schema).
+
+
+### 🔄 Data Flow (Data Lineage)
+
+Data originates from two systems:
+
+CRM → sales, customer, product
+
+ERP → customer birthdate, location, product categories
+
+Data moves through:
+Source → Bronze → Silver → Gold
+
+
+### 🔌 Integration Model
+
+CRM and ERP data are integrated during Silver → Gold transformations to create:
+
+Unified Customer Dimension, Unified Product Dimension, Fully integrated Sales Fact Table
+
+
+## ⭐ Gold Layer Data Model (Star Schema)
+
+**Fact Table**
+
+fact_sales:
+
+order_number, product_key, customer_key, order_date, shipping_date, due_date,  sales_amount, quantity, price
+
+**Dimension Tables**
+
+dim_customers :
+
+customer_key (PK), customer_id, customer_number, first_name, last_name, country,  marital_status, gender, birthdate, country 
+
+dim_products:
+
+product_key (PK), product_id, product_number, product_name, category_id, category, subcategory, maintenance, cost, product_line, start_date
+
+
+### 🧪 Data Quality Checks
+
+Quality checks are implemented in the Silver and Gold layers (/tests folder).
+
+**✔ Silver Layer QC:**
+
+Null or duplicate primary keys
+
+TRIM checks for string cleanup
+
+Negative or invalid numeric values
+
+Date format & logical order checks
+
+sales = quantity × price validation
+
+Category, marital status, gender consistency
+
+Out-of-range birthdates
+
+**✔ Gold Layer QC:**
+
+Surrogate key uniqueness (dim tables)
+
+Fact/dim join completeness (no orphan rows)
+
+These checks ensure the warehouse meets analytical and business requirements.
+
+#📂 Repository Structure
+
+data-warehouse-project/
+│
+├── datasets/                           # Raw datasets used for the project (ERP and CRM data)
+│
+├── docs/                               # Project documentation and architecture details
+│   ├── data_architecture.drawio        # Draw.io file shows the project's architecture
+│   ├── data_catalog.md                 # Catalog of datasets, including field descriptions and metadata
+│   ├── data_flow.drawio                # Draw.io file for the data flow diagram
+│   ├── data_integration.drawio         # Draw.io file for the data integration model
+│   ├── data_models.drawio              # Draw.io file for data models (star schema)
+│   ├── naming-conventions.md           # Consistent naming guidelines for tables, columns, and files
+│
+├── scripts/                            # SQL scripts for ETL and transformations
+│   ├── bronze/                         # Scripts for extracting and loading raw data
+│   ├── silver/                         # Scripts for cleaning and transforming data
+│   ├── gold/                           # Scripts for creating analytical models
+│
+├── tests/                              # Test scripts and quality files
+│
+├── README.md                           # Project overview and instructions
+├── LICENSE                             # License information for the repository
+├── .gitignore                          # Files and directories to be ignored by Git
+└── requirements.txt                    # Dependencies and requirements for the project
+
+
+
+### 🧱 Technologies Used
+
+SQL Server
+
+T-SQL (Stored Procedures)
+
+Medallion Architecture (Bronze/Silver/Gold)
+
+Dimensional Modelling (Kimball)
+
+Git & Version Control
+
+📊 Analytics & Reporting (Future Work with a separate Repo)
+
+This project provides the Gold Views required for the analytics layer.
+
+**📚 Documentation**
+
+Data Catalog — docs/data_catalog.md
+
+Business Logic & Definitions — included in Gold views
+
+Data Flow, Architecture, Model Diagrams — docs/
+
+👤 Author
+
+Marsel Luase
+📧 luaseachell@gmail.com
+
+🔗 LinkedIn: https://www.linkedin.com/in/marsel-pongdatu-luase-24249836a/
+
+⚖️ License
+
+This project is licensed under the MIT License.
+Feel free to use, modify, or share with attribution.
 
 
 
